@@ -28,12 +28,12 @@ export default function StatsCards({
       bg: "bg-red-50",
     },
     {
-      title: "Recovered Revenue",
-      value: `₹${metrics.recovered_revenue}`,
-      icon: IndianRupee,
-      iconColor: "text-green-600",
-      bg: "bg-green-50",
-    },
+  title: "Recovered Revenue",
+  value: `₹${metrics.recovered_revenue}`,
+  icon: IndianRupee,
+  iconColor: "text-green-600",
+  bg: "bg-green-50",
+},
     {
       title: "Recovery Rate",
       value: `${metrics.recovery_rate}%`,

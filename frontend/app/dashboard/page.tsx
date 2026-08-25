@@ -24,7 +24,7 @@ export default function Dashboard() {
       try {
         // Dashboard Metrics
         const metricsRes = await fetch(
-          "https://revenuepilot-y2li.onrender.com/metrics"
+          "https://revenuepilot-y2li.onrender.com/dashboard-metrics"
         );
         const metricsData = await metricsRes.json();
         setMetrics(metricsData);

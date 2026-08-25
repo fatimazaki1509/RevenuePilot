@@ -32,12 +32,12 @@ export default function HeroSection({
 
         <div className="bg-white/10 p-5 rounded-2xl">
           <p className="text-blue-200 text-sm">
-            Recovered Transactions
-          </p>
+  Recovered Revenue
+</p>
 
-          <h2 className="text-3xl font-bold mt-2">
-            {metrics?.recovered_transactions || 0}
-          </h2>
+<h2 className="text-3xl font-bold mt-2">
+  ₹{metrics?.recovered_revenue || 0}
+</h2>
         </div>
 
         <div className="bg-white/10 p-5 rounded-2xl">
