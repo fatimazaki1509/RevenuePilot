@@ -59,12 +59,14 @@ export default function VoiceAgentPage() {
 
     recognition.start();
 
-    recognition.onresult = (event: any) => {
+    recognition.onresult = async (event: any) => {
 
       const text =
         event.results[0][0].transcript.toLowerCase();
 
       setTranscript(text);
+
+      let outcome = "";
 
       if (
         text.includes("pay now") ||
@@ -73,7 +75,8 @@ export default function VoiceAgentPage() {
         text.includes("i would like to pay")
       ) {
 
-        setStatus("Payment Recovery Success");
+        outcome = "Payment Recovery Success";
+        setStatus(outcome);
 
       } else if (
         text.includes("tomorrow") ||
@@ -82,11 +85,39 @@ export default function VoiceAgentPage() {
         text.includes("promise")
       ) {
 
-        setStatus("Promise To Pay Captured");
+        outcome = "Promise To Pay Captured";
+        setStatus(outcome);
 
       } else {
 
-        setStatus("Manual Review Required");
+        outcome = "Manual Review Required";
+        setStatus(outcome);
+
+      }
+
+      try {
+
+        await fetch(
+          "http://127.0.0.1:8000/voice-result",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
+            body: JSON.stringify({
+              transcript: text,
+              outcome: outcome,
+            }),
+          }
+        );
+
+      } catch (error) {
+
+        console.error(
+          "Voice Result Save Error:",
+          error
+        );
 
       }
 
