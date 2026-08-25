@@ -45,9 +45,8 @@ def dashboard_metrics():
     db.close()
 
     return {
-        "revenue_at_risk": revenue_at_risk,
-        "recovered_revenue": recovered_revenue,
-        "total_failed_transactions": total_failed,
-        "recovered_transactions": recovered_transactions,
-        "recovery_rate": round(recovery_rate, 2),
-    }
+    "revenue_at_risk": revenue_at_risk,
+    "recovered_revenue": recovered_revenue,
+    "total_failed_transactions": total_failed,
+    "recovery_rate": round(recovery_rate, 2),
+}
