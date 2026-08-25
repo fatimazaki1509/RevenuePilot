@@ -24,6 +24,9 @@ app.include_router(recovery_router)
 app.include_router(ai_router)
 app.include_router(activity_router)
 app.include_router(chart_router)
+from app.api.promise_to_pay import router as ptp_router
+
+app.include_router(ptp_router)
 
 
 @app.get("/")
