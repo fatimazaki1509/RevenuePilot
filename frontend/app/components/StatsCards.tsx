@@ -11,6 +11,7 @@ interface StatsCardsProps {
     total_failed_transactions: number;
     recovered_transactions: number;
     recovery_rate: number;
+    promise_to_pay_count: number;
   };
 }
 
@@ -38,10 +39,15 @@ export default function StatsCards({
       value: metrics.total_failed_transactions,
       icon: Activity,
     },
+    {
+      title: "Promise To Pay",
+      value: metrics.promise_to_pay_count,
+      icon: TrendingUp,
+    },
   ];
 
   return (
-    <div className="grid md:grid-cols-4 gap-6">
+    <div className="grid md:grid-cols-5 gap-6">
       {stats.map((item, index) => {
         const Icon = item.icon;
 

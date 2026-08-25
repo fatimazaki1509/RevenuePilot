@@ -48,3 +48,15 @@ def create_promise(event_id: int):
 
     finally:
         db.close()
+@router.get("/promises")
+def get_promises():
+
+    db = SessionLocal()
+
+    try:
+        promises = db.query(PromiseToPay).all()
+
+        return promises
+
+    finally:
+        db.close()

@@ -17,61 +17,69 @@ export default function Dashboard() {
 
   const [agentActivity, setAgentActivity] = useState<any[]>([]);
   const [chartData, setChartData] = useState<any[]>([]);
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      // Metrics
-      const metricsRes = await fetch(
-        "http://127.0.0.1:8000/dashboard-metrics"
-      );
-      const metricsData = await metricsRes.json();
-      setMetrics(metricsData);
+  const [promiseCount, setPromiseCount] = useState(0);
 
-      // Failed Events
-      const eventsRes = await fetch(
-        "http://127.0.0.1:8000/failed-events"
-      );
-      const eventsData = await eventsRes.json();
-      setFailedEvents(eventsData);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Metrics
+        const metricsRes = await fetch(
+          "http://127.0.0.1:8000/dashboard-metrics"
+        );
+        const metricsData = await metricsRes.json();
+        setMetrics(metricsData);
 
-      // AI Decision
-      const decisionRes = await fetch(
-        "http://127.0.0.1:8000/ai-decision/1"
-      );
-      const decisionData = await decisionRes.json();
-      setAiDecision(decisionData);
+        // Failed Events
+        const eventsRes = await fetch(
+          "http://127.0.0.1:8000/failed-events"
+        );
+        const eventsData = await eventsRes.json();
+        setFailedEvents(eventsData);
 
-      // Recovery Chart
-      const chartRes = await fetch(
-        "http://127.0.0.1:8000/recovery-chart"
-      );
-      const chartData = await chartRes.json();
-      setChartData(chartData);
+        // AI Decision
+        const decisionRes = await fetch(
+          "http://127.0.0.1:8000/ai-decision/1"
+        );
+        const decisionData = await decisionRes.json();
+        setAiDecision(decisionData);
 
-      // Agent Activity
-      const activityRes = await fetch(
-        "http://127.0.0.1:8000/agent-activity"
-      );
-      const activityData = await activityRes.json();
-      setAgentActivity(activityData);
+        // Recovery Chart
+        const chartRes = await fetch(
+          "http://127.0.0.1:8000/recovery-chart"
+        );
+        const chartData = await chartRes.json();
+        setChartData(chartData);
 
-    } catch (error) {
-      console.error("Dashboard Fetch Error:", error);
-    }
-  };
+        // Agent Activity
+        const activityRes = await fetch(
+          "http://127.0.0.1:8000/agent-activity"
+        );
+        const activityData = await activityRes.json();
+        setAgentActivity(activityData);
 
-  // Initial Load
-  fetchData();
+        // Promise To Pay
+        const promiseRes = await fetch(
+          "http://127.0.0.1:8000/promises"
+        );
+        const promiseData = await promiseRes.json();
+        setPromiseCount(promiseData.length);
 
-  // Auto Refresh Every 5 Seconds
-  const interval = setInterval(() => {
+      } catch (error) {
+        console.error("Dashboard Fetch Error:", error);
+      }
+    };
+
+    // Initial Load
     fetchData();
-  }, 5000);
 
-  // Cleanup
-  return () => clearInterval(interval);
+    // Auto Refresh Every 5 Seconds
+    const interval = setInterval(() => {
+      fetchData();
+    }, 5000);
 
-}, []);
+    return () => clearInterval(interval);
+
+  }, []);
 
   if (!metrics) {
     return (
@@ -99,7 +107,12 @@ useEffect(() => {
 
       <HeroSection metrics={metrics} />
 
-      <StatsCards metrics={metrics} />
+      <StatsCards
+        metrics={{
+          ...metrics,
+          promise_to_pay_count: promiseCount,
+        }}
+      />
 
       <div className="mt-8 space-y-6">
         <AgentActivity
