@@ -98,7 +98,7 @@ export default function VoiceAgentPage() {
       try {
 
         await fetch(
-          "http://127.0.0.1:8000/voice-result",
+          "https://revenuepilot-y2li.onrender.com/voice-result",
           {
             method: "POST",
             headers: {

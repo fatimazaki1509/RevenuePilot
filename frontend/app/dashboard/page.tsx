@@ -24,42 +24,42 @@ export default function Dashboard() {
       try {
         // Dashboard Metrics
         const metricsRes = await fetch(
-          "http://127.0.0.1:8000/dashboard-metrics"
+          "https://revenuepilot-y2li.onrender.com/metrics"
         );
         const metricsData = await metricsRes.json();
         setMetrics(metricsData);
 
         // Failed Events
         const eventsRes = await fetch(
-          "http://127.0.0.1:8000/failed-events"
+          "https://revenuepilot-y2li.onrender.com/failed-events"
         );
         const eventsData = await eventsRes.json();
         setFailedEvents(eventsData);
 
         // AI Decision
         const decisionRes = await fetch(
-          "http://127.0.0.1:8000/ai-decision/1"
+          "https://revenuepilot-y2li.onrender.com/ai-decision/1"
         );
         const decisionData = await decisionRes.json();
         setAiDecision(decisionData);
 
         // Recovery Chart
         const chartRes = await fetch(
-          "http://127.0.0.1:8000/recovery-chart"
+          "https://revenuepilot-y2li.onrender.com/recovery-chart"
         );
         const chartData = await chartRes.json();
         setChartData(chartData);
 
         // Agent Activity
         const activityRes = await fetch(
-          "http://127.0.0.1:8000/agent-activity"
+          "https://revenuepilot-y2li.onrender.com/agent-activity"
         );
         const activityData = await activityRes.json();
         setAgentActivity(activityData);
 
         // Promise To Pay
         const promiseRes = await fetch(
-          "http://127.0.0.1:8000/promises"
+          "https://revenuepilot-y2li.onrender.com/promises"
         );
         const promiseData = await promiseRes.json();
         setPromises(promiseData);
