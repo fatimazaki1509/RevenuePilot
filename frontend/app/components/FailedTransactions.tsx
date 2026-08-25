@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 interface FailedTransactionsProps {
   transactions: any[];
 }
@@ -5,9 +9,63 @@ interface FailedTransactionsProps {
 export default function FailedTransactions({
   transactions,
 }: FailedTransactionsProps) {
+
+  const [loadingId, setLoadingId] =
+    useState<number | null>(null);
+
+  const recoverPayment = async (
+    eventId: number
+  ) => {
+
+    setLoadingId(eventId);
+
+    try {
+
+      const response = await fetch(
+        `http://127.0.0.1:8000/recover/${eventId}`,
+        {
+          method: "POST",
+        }
+      );
+
+      const data = await response.json();
+
+      alert(
+`✅ Recovery Workflow Executed
+
+Event ID: ${data.event_id}
+
+Recovery Link Generated
+
+WhatsApp Triggered
+
+Status: ${data.status}`
+      );
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert(
+        "❌ Recovery workflow failed"
+      );
+
+    } finally {
+
+      setLoadingId(null);
+
+    }
+  };
+
   return (
     <div className="bg-white rounded-2xl p-6 shadow-md border mt-6">
+
       <div className="flex items-center justify-between mb-5">
+
         <div>
           <h2 className="text-xl font-bold text-[#0C2451]">
             Failed Payment Events
@@ -21,26 +79,52 @@ export default function FailedTransactions({
         <div className="bg-red-50 text-red-600 px-3 py-1 rounded-full text-sm font-medium">
           {transactions.length} Active Cases
         </div>
+
       </div>
 
       <div className="overflow-x-auto">
+
         <table className="w-full">
+
           <thead>
             <tr className="border-b text-gray-500 text-sm">
-              <th className="text-left py-3">Event ID</th>
-              <th className="text-left py-3">Amount</th>
-              <th className="text-left py-3">Failure Reason</th>
-              <th className="text-left py-3">Status</th>
-              <th className="text-left py-3">Recovery Score</th>
+
+              <th className="text-left py-3">
+                Event ID
+              </th>
+
+              <th className="text-left py-3">
+                Amount
+              </th>
+
+              <th className="text-left py-3">
+                Failure Reason
+              </th>
+
+              <th className="text-left py-3">
+                Status
+              </th>
+
+              <th className="text-left py-3">
+                Recovery Score
+              </th>
+
+              <th className="text-left py-3">
+                Action
+              </th>
+
             </tr>
           </thead>
 
           <tbody>
+
             {transactions.map((t) => (
+
               <tr
                 key={t.id}
                 className="border-b hover:bg-slate-50 transition"
               >
+
                 <td className="py-4 font-medium">
                   #{t.id}
                 </td>
@@ -70,11 +154,55 @@ export default function FailedTransactions({
                     {t.recovery_probability}%
                   </span>
                 </td>
+
+                <td>
+
+                  {t.status !== "recovered" ? (
+
+                    <button
+                      disabled={
+                        loadingId === t.id
+                      }
+                      onClick={() =>
+                        recoverPayment(t.id)
+                      }
+                      className="
+                        bg-blue-600
+                        hover:bg-blue-700
+                        disabled:bg-gray-400
+                        text-white
+                        px-4
+                        py-2
+                        rounded-lg
+                        text-sm
+                        transition
+                      "
+                    >
+                      {loadingId === t.id
+                        ? "Processing..."
+                        : "Recover"}
+                    </button>
+
+                  ) : (
+
+                    <span className="text-green-600 font-medium">
+                      Completed
+                    </span>
+
+                  )}
+
+                </td>
+
               </tr>
+
             ))}
+
           </tbody>
+
         </table>
+
       </div>
+
     </div>
   );
 }

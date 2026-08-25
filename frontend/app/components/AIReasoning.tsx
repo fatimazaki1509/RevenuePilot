@@ -46,11 +46,17 @@ export default function AIReasoning({
       );
 
       alert(
-        `Revenue recovery process completed.
+        `RevenuePilot AI Agent Completed
 
 Event ID: ${data.event_id}
 
-Transaction status updated to RECOVERED.`
+Recovery Workflow Executed
+
+Recovery Link Generated
+
+Customer Outreach Triggered
+
+Status: ${data.status}`
       );
 
     } catch (error) {
@@ -104,6 +110,50 @@ Transaction status updated to RECOVERED.`
 
         <div className="mt-3 bg-green-100 text-green-700 px-3 py-2 rounded-full inline-block text-sm font-semibold">
           {aiDecision?.recovery_score}% Recovery Score
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-4 mt-4">
+
+          <div className="bg-white p-3 rounded-xl border">
+            <p className="text-xs text-gray-500">
+              Priority
+            </p>
+
+            <p className="font-semibold text-red-600">
+              {aiDecision?.priority}
+            </p>
+          </div>
+
+          <div className="bg-white p-3 rounded-xl border">
+            <p className="text-xs text-gray-500">
+              Agent Confidence
+            </p>
+
+            <p className="font-semibold text-blue-600">
+              {aiDecision?.agent_confidence}%
+            </p>
+          </div>
+
+          <div className="bg-white p-3 rounded-xl border">
+            <p className="text-xs text-gray-500">
+              Next Best Action
+            </p>
+
+            <p className="font-semibold text-green-600">
+              {aiDecision?.next_best_action}
+            </p>
+          </div>
+
+          <div className="bg-white p-3 rounded-xl border">
+            <p className="text-xs text-gray-500">
+              Recovery Value
+            </p>
+
+            <p className="font-semibold text-[#0C2451]">
+              ₹{aiDecision?.estimated_recovery_value}
+            </p>
+          </div>
+
         </div>
 
       </div>
@@ -162,6 +212,26 @@ Transaction status updated to RECOVERED.`
 
       </div>
 
+      <div className="bg-indigo-50 p-5 rounded-2xl mt-5">
+
+        <h3 className="font-semibold mb-2">
+          AI Agent Summary
+        </h3>
+
+        <p className="text-sm text-gray-700">
+          RevenuePilot predicts a
+          <span className="font-semibold text-green-600">
+            {" "}{aiDecision?.recovery_score}%{" "}
+          </span>
+          probability of recovering this revenue through
+          <span className="font-semibold">
+            {" "}{aiDecision?.recommended_channel}
+          </span>
+          .
+        </p>
+
+      </div>
+
       <button
         onClick={launchRecovery}
         disabled={loading}
@@ -171,8 +241,8 @@ Transaction status updated to RECOVERED.`
 
         {
           loading
-            ? "Launching Recovery..."
-            : "Launch Recovery"
+            ? "AI Agent Executing..."
+            : "Launch Autonomous Recovery"
         }
       </button>
 

@@ -9,20 +9,20 @@ import FailedTransactions from "../components/FailedTransactions";
 import AIReasoning from "../components/AIReasoning";
 import HeroSection from "../components/HeroSection";
 import Navbar from "../components/Navbar";
+import PromiseToPayTable from "../components/PromiseToPayTable";
 
 export default function Dashboard() {
   const [metrics, setMetrics] = useState<any>(null);
   const [failedEvents, setFailedEvents] = useState<any[]>([]);
   const [aiDecision, setAiDecision] = useState<any>(null);
-
   const [agentActivity, setAgentActivity] = useState<any[]>([]);
   const [chartData, setChartData] = useState<any[]>([]);
-  const [promiseCount, setPromiseCount] = useState(0);
+  const [promises, setPromises] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Metrics
+        // Dashboard Metrics
         const metricsRes = await fetch(
           "http://127.0.0.1:8000/dashboard-metrics"
         );
@@ -62,10 +62,13 @@ export default function Dashboard() {
           "http://127.0.0.1:8000/promises"
         );
         const promiseData = await promiseRes.json();
-        setPromiseCount(promiseData.length);
+        setPromises(promiseData);
 
       } catch (error) {
-        console.error("Dashboard Fetch Error:", error);
+        console.error(
+          "Dashboard Fetch Error:",
+          error
+        );
       }
     };
 
@@ -110,7 +113,7 @@ export default function Dashboard() {
       <StatsCards
         metrics={{
           ...metrics,
-          promise_to_pay_count: promiseCount,
+          promise_to_pay_count: promises.length,
         }}
       />
 
@@ -119,7 +122,9 @@ export default function Dashboard() {
           activities={agentActivity}
         />
 
-        <AITimeline aiDecision={aiDecision} />
+        <AITimeline
+          aiDecision={aiDecision}
+        />
 
         <RecoveryChart
           data={chartData}
@@ -131,6 +136,10 @@ export default function Dashboard() {
 
         <AIReasoning
           aiDecision={aiDecision}
+        />
+
+        <PromiseToPayTable
+          promises={promises}
         />
       </div>
     </div>

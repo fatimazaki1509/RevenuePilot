@@ -43,7 +43,9 @@ export default function AgentActivity({
 
   return (
     <div className="bg-[#0C2451] text-white rounded-2xl p-6 shadow-lg">
+
       <div className="flex justify-between items-center mb-5">
+
         <div>
           <h2 className="text-xl font-bold">
             Autonomous Agent Activity
@@ -56,28 +58,67 @@ export default function AgentActivity({
 
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-          <span className="text-xs">
+
+          <span className="text-xs font-medium">
             LIVE
           </span>
         </div>
+
       </div>
 
       <div className="space-y-4">
-        {data.map((activity: any, index: number) => (
-          <div
-            key={index}
-            className="flex justify-between border-b border-white/10 pb-3"
-          >
-            <span>
-              {activity.text}
-            </span>
 
-            <span className="text-xs text-gray-300">
-              {activity.time}
-            </span>
-          </div>
-        ))}
+        {data.map(
+          (
+            activity: any,
+            index: number
+          ) => {
+
+            const Icon =
+              activity.icon ||
+              CheckCircle2;
+
+            return (
+              <div
+                key={index}
+                className="
+                  flex
+                  items-center
+                  justify-between
+                  border-b
+                  border-white/10
+                  pb-3
+                  hover:bg-white/5
+                  px-2
+                  rounded-lg
+                  transition
+                "
+              >
+
+                <div className="flex items-center gap-3">
+
+                  <Icon
+                    size={18}
+                    className="text-green-400"
+                  />
+
+                  <span>
+                    {activity.text}
+                  </span>
+
+                </div>
+
+                <span className="text-xs text-gray-300">
+                  {activity.time}
+                </span>
+
+              </div>
+            );
+          }
+        )}
+
       </div>
+
     </div>
   );
 }

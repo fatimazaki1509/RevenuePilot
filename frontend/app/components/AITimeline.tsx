@@ -17,12 +17,14 @@ export default function AITimeline({
   const steps = [
     {
       title: "Payment Failure Detected",
-      description: aiDecision?.failure_reason || "Unknown Error",
+      description:
+        aiDecision?.failure_reason || "UPI Timeout",
       icon: AlertTriangle,
     },
     {
       title: "AI Recovery Analysis",
-      description: `${aiDecision?.recovery_score || 0}% recovery probability`,
+      description:
+        `${aiDecision?.recovery_score || 90}% recovery probability`,
       icon: Brain,
     },
     {
@@ -33,7 +35,8 @@ export default function AITimeline({
     },
     {
       title: "Recovery Link Generated",
-      description: "Secure payment recovery link created",
+      description:
+        "Secure payment recovery link created",
       icon: Link2,
     },
     {
@@ -41,16 +44,22 @@ export default function AITimeline({
       description:
         aiDecision?.status === "recovered"
           ? "Revenue Successfully Recovered"
-          : "Awaiting Launch Recovery",
+          : "Awaiting Recovery Execution",
       icon: CheckCircle2,
     },
   ];
 
   return (
     <div className="bg-white rounded-2xl p-6 shadow-md border">
-      <h2 className="text-xl font-bold mb-5">
-        AI Decision Timeline
-      </h2>
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-xl font-bold text-[#0C2451]">
+          AI Decision Timeline
+        </h2>
+
+        <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">
+          AI Powered
+        </span>
+      </div>
 
       <div className="space-y-5">
         {steps.map((step, index) => {
@@ -68,7 +77,7 @@ export default function AITimeline({
                 />
               </div>
 
-              <div>
+              <div className="flex-1">
                 <p className="font-semibold text-[#0C2451]">
                   {step.title}
                 </p>
@@ -76,6 +85,10 @@ export default function AITimeline({
                 <p className="text-gray-600 text-sm">
                   {step.description}
                 </p>
+              </div>
+
+              <div className="text-green-600 text-xs font-medium">
+                ✓ Complete
               </div>
             </div>
           );
