@@ -74,13 +74,13 @@ export default function HeroSection({
           </span>
         </div>
 
-        <div className="text-sm text-blue-200">
-          Last Updated: {
-            metrics?.last_recovered_at
-              ? new Date(metrics.last_recovered_at).toLocaleString()
-              : "No recovery yet"
-          }
-        </div>
+       <div className="text-sm text-blue-200">
+  Last Updated: {
+    metrics?.last_recovered_at
+      ? new Date(metrics.last_recovered_at).toLocaleTimeString()
+      : "No recovery yet"
+  }
+</div>
 
       </div>
 

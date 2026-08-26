@@ -42,11 +42,26 @@ def dashboard_metrics():
         else 0
     )
 
+    # NEW CODE
+    latest_recovery = (
+        db.query(FailedEvent)
+        .filter(FailedEvent.status == "recovered")
+        .order_by(FailedEvent.recovered_at.desc())
+        .first()
+    )
+
     db.close()
 
     return {
-    "revenue_at_risk": revenue_at_risk,
-    "recovered_revenue": recovered_revenue,
-    "total_failed_transactions": total_failed,
-    "recovery_rate": round(recovery_rate, 2),
-}
+        "revenue_at_risk": revenue_at_risk,
+        "recovered_revenue": recovered_revenue,
+        "total_failed_transactions": total_failed,
+        "recovery_rate": round(recovery_rate, 2),
+
+        # NEW FIELD
+        "last_recovered_at": (
+            latest_recovery.recovered_at.isoformat()
+            if latest_recovery and latest_recovery.recovered_at
+            else None
+        ),
+    }
