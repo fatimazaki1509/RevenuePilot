@@ -10,6 +10,7 @@ import AIReasoning from "../components/AIReasoning";
 import HeroSection from "../components/HeroSection";
 import Navbar from "../components/Navbar";
 import PromiseToPayTable from "../components/PromiseToPayTable";
+import AddFailedEvent from "../components/AddFailedEvent";
 
 export default function Dashboard() {
   const [metrics, setMetrics] = useState<any>(null);
@@ -36,12 +37,22 @@ export default function Dashboard() {
         const eventsData = await eventsRes.json();
         setFailedEvents(eventsData);
 
-        // AI Decision
-        const decisionRes = await fetch(
-          "https://revenuepilot-y2li.onrender.com/ai-decision/1"
-        );
-        const decisionData = await decisionRes.json();
-        setAiDecision(decisionData);
+        // Dynamic AI Decision
+        if (eventsData.length > 0) {
+          const pendingEvent =
+            eventsData.find(
+              (e: any) => e.status === "pending"
+            ) || eventsData[0];
+
+          const decisionRes = await fetch(
+            `https://revenuepilot-y2li.onrender.com/ai-decision/${pendingEvent.id}`
+          );
+
+          const decisionData =
+            await decisionRes.json();
+
+          setAiDecision(decisionData);
+        }
 
         // Recovery Chart
         const chartRes = await fetch(
@@ -96,15 +107,6 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-slate-100 p-8">
-      {/* <div className="mb-8">
-        <h1 className="text-5xl font-bold text-[#0C2451]">
-          RevenuePilot Dashboard
-        </h1>
-
-        <p className="text-gray-600 mt-2">
-          Autonomous AI-Powered Revenue Recovery Platform
-        </p>
-      </div> */}
 
       <Navbar />
 
@@ -118,6 +120,7 @@ export default function Dashboard() {
       />
 
       <div className="mt-8 space-y-6">
+
         <AgentActivity
           activities={agentActivity}
         />
@@ -129,6 +132,7 @@ export default function Dashboard() {
         <RecoveryChart
           data={chartData}
         />
+        <AddFailedEvent />
 
         <FailedTransactions
           transactions={failedEvents}
@@ -141,6 +145,7 @@ export default function Dashboard() {
         <PromiseToPayTable
           promises={promises}
         />
+
       </div>
     </div>
   );

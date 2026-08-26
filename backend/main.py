@@ -8,6 +8,8 @@ from app.api.ai_decision import router as ai_router
 from app.api.agent_activity import router as activity_router
 from app.api.recovery_chart import router as chart_router
 from app.services.whatsapp_service import send_recovery_message
+from app.api.create_event import router as create_event_router
+
 
 app = FastAPI(title=settings.APP_NAME)
 app.add_middleware(
@@ -24,6 +26,7 @@ app.include_router(recovery_router)
 app.include_router(ai_router)
 app.include_router(activity_router)
 app.include_router(chart_router)
+app.include_router(create_event_router)
 from app.api.promise_to_pay import router as ptp_router
 from app.api.voice_agent import router as voice_router
 
