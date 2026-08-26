@@ -5,6 +5,7 @@ from app.api.agent_activity import activity_log
 from app.services.whatsapp_service import send_recovery_message
 from app.core.database import SessionLocal
 from app.models.failed_events import FailedEvent
+from datetime import datetime
 
 router = APIRouter()
 
@@ -62,7 +63,7 @@ def recover_payment(event_id: int):
 
         # Mark as recovered
         event.status = "recovered"
-
+        event.recovered_at = datetime.now()
         db.commit()
         db.refresh(event)
 

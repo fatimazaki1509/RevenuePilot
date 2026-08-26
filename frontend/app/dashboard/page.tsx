@@ -96,7 +96,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-slate-100 p-8">
-      <div className="mb-8">
+      {/* <div className="mb-8">
         <h1 className="text-5xl font-bold text-[#0C2451]">
           RevenuePilot Dashboard
         </h1>
@@ -104,7 +104,7 @@ export default function Dashboard() {
         <p className="text-gray-600 mt-2">
           Autonomous AI-Powered Revenue Recovery Platform
         </p>
-      </div>
+      </div> */}
 
       <Navbar />
 

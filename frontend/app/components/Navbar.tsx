@@ -1,7 +1,12 @@
+"use client";
+
+import Link from "next/link";
+
 export default function Navbar() {
   return (
     <div className="bg-white border rounded-2xl px-6 py-4 shadow-sm mb-6">
       <div className="flex items-center justify-between">
+
         <div>
           <h1 className="text-2xl font-bold text-[#0C2451]">
             RevenuePilot
@@ -12,13 +17,30 @@ export default function Navbar() {
           </p>
         </div>
 
-        <div className="flex items-center gap-2 bg-green-50 px-3 py-2 rounded-full">
-          <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+        <div className="flex items-center gap-4">
 
-          <span className="text-sm font-medium text-green-600">
-            System Active
-          </span>
+          <Link href="/dashboard">
+            <button className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 transition">
+              Dashboard
+            </button>
+          </Link>
+
+          <Link href="/voice-agent">
+            <button className="px-4 py-2 rounded-xl bg-[#0C2451] text-white hover:bg-[#15387d] transition">
+              🎙 Voice Agent
+            </button>
+          </Link>
+
+          <div className="flex items-center gap-2 bg-green-50 px-3 py-2 rounded-full">
+            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+
+            <span className="text-sm font-medium text-green-600">
+              System Active
+            </span>
+          </div>
+
         </div>
+
       </div>
     </div>
   );

@@ -1,6 +1,9 @@
 from app.core.database import SessionLocal
 from app.models.customer import Customer
 from app.models.failed_events import FailedEvent
+from datetime import datetime
+
+recovered_at=datetime.now()
 
 db = SessionLocal()
 
@@ -37,7 +40,8 @@ try:
             currency="INR",
             failure_reason=reason,
             status=status,
-            recovery_probability=prob
+            recovery_probability=prob,
+            recovered_at=datetime.now()
         )
 
         db.add(event)

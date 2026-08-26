@@ -18,15 +18,16 @@ def get_failed_events():
 
     for event in events:
         result.append({
-            "id": event.id,
-            "customer_id": event.customer_id,
-            "event_type": event.event_type,
-            "amount": event.amount,
-            "currency": event.currency,
-            "failure_reason": event.failure_reason,
-            "status": event.status,
-            "recovery_probability": event.recovery_probability
-        })
+    "id": event.id,
+    "customer_id": event.customer_id,
+    "event_type": event.event_type,
+    "amount": event.amount,
+    "currency": event.currency,
+    "failure_reason": event.failure_reason,
+    "status": event.status,
+    "recovery_probability": event.recovery_probability,
+    "recovered_at": event.recovered_at
+})
 
     db.close()
 

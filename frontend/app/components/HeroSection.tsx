@@ -7,6 +7,7 @@ export default function HeroSection({
 }: HeroSectionProps) {
   return (
     <div className="bg-[#0B1F5B] text-white rounded-3xl p-8 mb-6 shadow-lg">
+
       <p className="text-blue-300 font-medium">
         Autonomous AI Revenue Recovery Platform
       </p>
@@ -19,7 +20,8 @@ export default function HeroSection({
         Recover failed payments automatically using AI-driven decisioning and recovery workflows.
       </p>
 
-      <div className="grid md:grid-cols-3 gap-6 mt-8">
+      <div className="grid md:grid-cols-4 gap-6 mt-8">
+
         <div className="bg-white/10 p-5 rounded-2xl">
           <p className="text-blue-200 text-sm">
             Revenue At Risk
@@ -32,12 +34,12 @@ export default function HeroSection({
 
         <div className="bg-white/10 p-5 rounded-2xl">
           <p className="text-blue-200 text-sm">
-  Recovered Revenue
-</p>
+            Recovered Revenue
+          </p>
 
-<h2 className="text-3xl font-bold mt-2">
-  ₹{metrics?.recovered_revenue || 0}
-</h2>
+          <h2 className="text-3xl font-bold mt-2">
+            ₹{metrics?.recovered_revenue || 0}
+          </h2>
         </div>
 
         <div className="bg-white/10 p-5 rounded-2xl">
@@ -49,15 +51,39 @@ export default function HeroSection({
             {metrics?.recovery_rate || 0}%
           </h2>
         </div>
+
+        <div className="bg-white/10 p-5 rounded-2xl">
+          <p className="text-blue-200 text-sm">
+            Failed Transactions
+          </p>
+
+          <h2 className="text-3xl font-bold mt-2">
+            {metrics?.total_failed_transactions || 0}
+          </h2>
+        </div>
+
       </div>
 
-      <div className="mt-8 flex items-center gap-3">
-        <div className="w-3 h-3 rounded-full bg-green-400 animate-pulse"></div>
+      <div className="mt-8 flex items-center justify-between">
 
-        <span className="text-sm text-green-200">
-          AI Recovery Engine Active
-        </span>
+        <div className="flex items-center gap-3">
+          <div className="w-3 h-3 rounded-full bg-green-400 animate-pulse"></div>
+
+          <span className="text-sm text-green-200">
+            AI Recovery Engine Active
+          </span>
+        </div>
+
+        <div className="text-sm text-blue-200">
+          Last Updated: {
+            metrics?.last_recovered_at
+              ? new Date(metrics.last_recovered_at).toLocaleString()
+              : "No recovery yet"
+          }
+        </div>
+
       </div>
+
     </div>
   );
 }

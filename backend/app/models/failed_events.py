@@ -3,11 +3,12 @@ from sqlalchemy import (
     Integer,
     String,
     Float,
-    ForeignKey
+    ForeignKey,
+    DateTime
 )
 
+from datetime import datetime
 from sqlalchemy.orm import relationship
-
 from app.models.base import Base
 
 
@@ -33,18 +34,12 @@ class FailedEvent(Base):
 
     recovery_probability = Column(Float)
 
+    recovered_at = Column(
+        DateTime,
+        nullable=True
+    )
+
     customer = relationship(
         "Customer",
         back_populates="failed_events"
     )
-
-
-#     # {
-#   "customer_id": 1,
-#   "event_type": "failed_payment",
-#   "amount": 4999,
-#   "currency": "INR",
-#   "failure_reason": "UPI Timeout",
-#   "status": "pending",
-#   "recovery_probability": 0.82
-# }
