@@ -27,12 +27,12 @@ def create_promise(event_id: int):
             }
 
         promise = PromiseToPay(
-        event_id=event.id,
-        customer_name=event.customer.name,
-        amount=event.amount,
-        promised_date="2026-08-28",
-        status="Promised"
-)
+            event_id=event.id,
+            customer_name=event.customer.name,
+            amount=event.amount,
+            promised_date="2026-08-28",
+            status="Pending"
+        )
 
         db.add(promise)
         db.commit()
@@ -48,15 +48,56 @@ def create_promise(event_id: int):
 
     finally:
         db.close()
+
+
 @router.get("/promises")
 def get_promises():
 
     db = SessionLocal()
 
     try:
+
         promises = db.query(PromiseToPay).all()
 
         return promises
+
+    finally:
+        db.close()
+
+
+@router.put("/promise/{promise_id}/status")
+def update_promise_status(
+    promise_id: int,
+    status: str
+):
+
+    db = SessionLocal()
+
+    try:
+
+        promise = (
+            db.query(PromiseToPay)
+            .filter(
+                PromiseToPay.id == promise_id
+            )
+            .first()
+        )
+
+        if not promise:
+            return {
+                "error": "Promise not found"
+            }
+
+        promise.status = status
+
+        db.commit()
+        db.refresh(promise)
+
+        return {
+            "message": "Status Updated",
+            "id": promise.id,
+            "status": promise.status
+        }
 
     finally:
         db.close()
