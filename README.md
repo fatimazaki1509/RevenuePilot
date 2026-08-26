@@ -127,11 +127,8 @@ Single interface for:
 
 ## System Architecture
 
-Insert architecture diagram here.
+![Uploading ChatGPT Image Aug 27, 2026, 01_41_12 AM.png…]()
 
-Example file:
-
-docs/architecture.png
 
 ---
 
