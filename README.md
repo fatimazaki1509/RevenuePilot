@@ -136,7 +136,8 @@ Single interface for:
 
 ## System Architecture
 
-<img width="1536" height="1024" alt="System Architecture" src="https://github.com/user-attachments/assets/68a10daf-fba2-42a5-9122-83faea8f2add" />
+<img width="1536" height="1024" alt="Backend (FastAPI)" src="https://github.com/user-attachments/assets/9d91f535-169f-4cb1-b2f8-5c79f5952707" />
+
 
 
 
