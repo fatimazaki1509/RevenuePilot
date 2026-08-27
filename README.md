@@ -127,7 +127,8 @@ Single interface for:
 
 ## System Architecture
 
-![Uploading ChatGPT Image Aug 27, 2026, 01_41_12 AM.png…]()
+<img width="1536" height="1024" alt="System Architecture" src="https://github.com/user-attachments/assets/68a10daf-fba2-42a5-9122-83faea8f2add" />
+
 
 
 
