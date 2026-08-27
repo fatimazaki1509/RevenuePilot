@@ -22,7 +22,7 @@ export default function FailedTransactions({
     try {
 
       const response = await fetch(
-        `http://127.0.0.1:8000/recover/${eventId}`,
+        `https://revenuepilot-y2li.onrender.com/recover/${eventId}`,
         {
           method: "POST",
         }

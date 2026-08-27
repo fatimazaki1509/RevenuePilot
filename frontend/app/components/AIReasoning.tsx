@@ -29,7 +29,7 @@ export default function AIReasoning({
       setLoading(true);
 
       const response = await fetch(
-        `http://127.0.0.1:8000/recover/${aiDecision.event_id}`,
+        `https://revenuepilot-y2li.onrender.com/recover/${aiDecision.event_id}`,
         {
           method: "POST",
         }
