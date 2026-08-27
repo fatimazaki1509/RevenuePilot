@@ -1,3 +1,12 @@
+![Next.js](https://img.shields.io/badge/Next.js-14-black)
+![FastAPI](https://img.shields.io/badge/FastAPI-Backend-green)
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-blue)
+![NeonDB](https://img.shields.io/badge/NeonDB-Serverless-green)
+![Gemini](https://img.shields.io/badge/Gemini-AI-purple)
+![Vercel](https://img.shields.io/badge/Vercel-Frontend-black)
+![Render](https://img.shields.io/badge/Render-Backend-46E3B7)
+![Status](https://img.shields.io/badge/Status-Live-success)
 # RevenuePilot
 
 Autonomous AI-Powered Revenue Recovery Platform
@@ -138,23 +147,28 @@ Single interface for:
 
 ### Main Dashboard
 
-Insert Screenshot
+<img width="1912" height="940" alt="image" src="https://github.com/user-attachments/assets/d9020688-71d3-4479-b699-a59954b43a27" />
+
 
 ### Failed Transactions
 
-Insert Screenshot
+<img width="1917" height="752" alt="image" src="https://github.com/user-attachments/assets/7a28314c-4ea8-41d6-81b8-7ee4f671a6f0" />
+
 
 ### AI Decision Engine
 
-Insert Screenshot
+<img width="1917" height="657" alt="image" src="https://github.com/user-attachments/assets/495898ac-85a8-469f-818f-67c825a12040" />
+
 
 ### Promise-To-Pay Queue
 
-Insert Screenshot
+<img width="1917" height="277" alt="image" src="https://github.com/user-attachments/assets/edb578e7-9ced-4d8f-8aeb-20fb16f3d055" />
+
 
 ### Voice Agent Recovery
 
-Insert Screenshot
+<img width="1917" height="563" alt="image" src="https://github.com/user-attachments/assets/319ca44c-c028-4074-90e0-0c1836664928" />
+
 
 ---
 
