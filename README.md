@@ -28,15 +28,7 @@ https://revenuepilot-y2li.onrender.com/docs
 
 ---
 
-## Demo Video
 
-Add Loom / YouTube Demo Link Here
-
-Example:
-
-https://loom.com/your-demo-video
-
----
 
 ## Problem Statement
 
